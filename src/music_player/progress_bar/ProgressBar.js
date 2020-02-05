@@ -17,9 +17,18 @@ const getPos =(e)=>{
 }
 
 //set the new value to the progress bar
-const setProgress = (event)=>{
+const setProgressFromMouse = (event)=>{
     if(isMouseDown){
         const value = getPos(event)
+        sliderButton.current.style.left = value + "%";
+        sliderBackGround.current.style.width = value + "%";
+    }
+}
+
+//set the new value to the progress bar
+const setProgress = (value)=>{
+    if(sliderButton.current){
+        console.log(value)    
         sliderButton.current.style.left = value + "%";
         sliderBackGround.current.style.width = value + "%";
     }
@@ -32,6 +41,9 @@ const sliderBackGround = React.createRef()
 
 export default (props)=>{
     let currentTime = props.currentTime;
+    const totalLength = props.length
+    console.log("Re",currentTime/totalLength*100)
+    setProgress(currentTime)
     return(
         <div className="audio-progress">
             <div className="progress-label"> {currentTime} </div>
@@ -39,15 +51,15 @@ export default (props)=>{
                 <div className="progress"
                     ref={slider} 
                     // onMouseOver={(e)=>{change(e,isMouseDown)}} 
-                    onMouseDown={(e)=>{isMouseDown = true;setProgress(e)}}
+                    onMouseDown={(e)=>{isMouseDown = true;setProgressFromMouse(e)}}
                     onMouseUp={()=>{isMouseDown = false;}}
-                    onMouseOver={(e)=>{setProgress(e)}}
+                    onMouseOver={(e)=>{setProgressFromMouse(e)}}
                 >
                     <div className="progress_btn" ref={sliderButton}></div>
                     <div className="progress_bg" ref={sliderBackGround}> </div>
                 </div>
             </div>
-            <div className="progress-label">00.00</div>
+    <div className="progress-label">{!!totalLength ? totalLength : "0"}</div>
         </div>
     )
 }

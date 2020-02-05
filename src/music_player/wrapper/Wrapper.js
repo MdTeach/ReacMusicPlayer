@@ -10,14 +10,15 @@ import VolumeSeeker from '../volume_seeker/VolumeSeeker'
 
 import './Wrapper.css'
 
+const url ="https://firebasestorage.googleapis.com/v0/b/auth-a3c8b.appspot.com/o/songs%2FMemories%20-%20Maroon%205.mp3?alt=media&token=94b50f5e-325d-4ebd-a498-1a5f084b9d4a"
+const audio = new Audio(url)
 export default ()=>{
-    const url ="https://firebasestorage.googleapis.com/v0/b/auth-a3c8b.appspot.com/o/songs%2FMemories%20-%20Maroon%205.mp3?alt=media&token=94b50f5e-325d-4ebd-a498-1a5f084b9d4a"
-    const audio = new Audio(url)
     
     const [currentTime,updateCurrentTime] = useState(0) 
+    const handlePlayPause = ()=>{if(audio.paused){audio.play()}else{audio.pause()}}
     
     useEffect(() => {
-        audio.play();
+        //audio.play()
 
         //set the current time
         updateCurrentTime(audio.currentTime)
@@ -26,7 +27,6 @@ export default ()=>{
         audio.addEventListener("timeupdate",(e)=>{
             let newTime  = e.currentTarget.currentTime; 
             updateCurrentTime(newTime)
-            console.log(e.currentTarget.currentTime)
         });
 
     },[0]);
@@ -39,10 +39,10 @@ export default ()=>{
         <div className="wrapper">
             <div className="left-part">
                 <div className="audio-control-button">
-                    <ControlButtons/>
+                    <ControlButtons handlePlayPause={handlePlayPause}/>
                 </div>
                 <div className="audio-progress">
-                    <AudioProgress currentTime={currentTime}/>
+                    <AudioProgress currentTime={currentTime} length={audio.duration}/>
                 </div>
             </div>
             <div className="right-part">

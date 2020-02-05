@@ -2,13 +2,7 @@ import React from 'react'
 
 export default (props)=>{
     const handlePlayPause = ()=>{
-        // const audio = props.audio;
-        // console.log(audio)   
-        // if(audio.paused){
-        //     audio.play()
-        // }else{
-        //     audio.pause()
-        // }
+        props.handlePlayPause()
     }
 
     return(
