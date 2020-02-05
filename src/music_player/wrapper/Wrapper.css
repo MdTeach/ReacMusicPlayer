@@ -1,12 +1,11 @@
 .wrapper{
-    height: 150px;
+    height: 80px;
     background-color:#282828;
     display: flex;
 }
 
 .left-part{
     flex: 4;
-    background-color: brown;
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -14,6 +13,5 @@
 
 .right-part{
     flex: 1;
-    background-color: cadetblue;
     text-align: right;
 }

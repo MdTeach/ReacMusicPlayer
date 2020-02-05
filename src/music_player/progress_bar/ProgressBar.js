@@ -5,6 +5,9 @@ import React,{
 import './ProgressBar.css'
 
 
+//utils function
+import {getInMinutes} from '../utils/TimeFormatter'
+
 //is the mouse down
 let isMouseDown = false;
 
@@ -17,22 +20,7 @@ const getPos =(e)=>{
 }
 
 //set the new value to the progress bar
-const setProgressFromMouse = (event)=>{
-    if(isMouseDown){
-        const value = getPos(event)
-        sliderButton.current.style.left = value + "%";
-        sliderBackGround.current.style.width = value + "%";
-    }
-}
 
-//set the new value to the progress bar
-const setProgress = (value)=>{
-    if(sliderButton.current){
-        console.log(value)    
-        sliderButton.current.style.left = value + "%";
-        sliderBackGround.current.style.width = value + "%";
-    }
-}
 
 //refrence to the html elments
 const slider = React.createRef()
@@ -40,13 +28,32 @@ const sliderButton = React.createRef()
 const sliderBackGround = React.createRef()
 
 export default (props)=>{
-    let currentTime = props.currentTime;
+    let currentTime = props.currentTime/props.length*100;
+
     const totalLength = props.length
-    console.log("Re",currentTime/totalLength*100)
+
+    const setProgressFromMouse = (event)=>{
+        if(isMouseDown){
+            const value = getPos(event)
+            props.updateCurrentTime(value/100*props.length)
+            console.log("Setting ..",value)
+            // sliderButton.current.style.left = value + "%";
+            // sliderBackGround.current.style.width = value + "%";
+        }
+    }
+    
+    //set the new value to the progress bar
+    const setProgress = (value)=>{
+        if(sliderButton.current){
+            sliderButton.current.style.left = value + "%";
+            sliderBackGround.current.style.width = value + "%";
+        }
+    }
+    console.log("Re",currentTime)
     setProgress(currentTime)
     return(
         <div className="audio-progress">
-            <div className="progress-label"> {currentTime} </div>
+            <div className="progress-label"> {!!currentTime ? getInMinutes(props.currentTime) : "00:00"} </div>
             <div className="slidecontainer">
                 <div className="progress"
                     ref={slider} 
@@ -59,7 +66,7 @@ export default (props)=>{
                     <div className="progress_bg" ref={sliderBackGround}> </div>
                 </div>
             </div>
-    <div className="progress-label">{!!totalLength ? totalLength : "0"}</div>
+    <div className="progress-label">{!!totalLength ? getInMinutes(totalLength) : "0"}</div>
         </div>
     )
 }

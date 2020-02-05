@@ -14,19 +14,24 @@ const url ="https://firebasestorage.googleapis.com/v0/b/auth-a3c8b.appspot.com/o
 const audio = new Audio(url)
 export default ()=>{
     
-    const [currentTime,updateCurrentTime] = useState(0) 
+    const [currentTime,setCurrentTime] = useState(0) 
     const handlePlayPause = ()=>{if(audio.paused){audio.play()}else{audio.pause()}}
     
+    const updateCurrentTime = (newTime) =>{
+        audio.currentTime = newTime;
+        setCurrentTime(audio.currentTime);
+    }
+
     useEffect(() => {
         //audio.play()
 
         //set the current time
-        updateCurrentTime(audio.currentTime)
+        setCurrentTime(audio.currentTime)
 
         //add listener to the get update of each second
         audio.addEventListener("timeupdate",(e)=>{
             let newTime  = e.currentTarget.currentTime; 
-            updateCurrentTime(newTime)
+            setCurrentTime(newTime)
         });
 
     },[0]);
@@ -42,7 +47,7 @@ export default ()=>{
                     <ControlButtons handlePlayPause={handlePlayPause}/>
                 </div>
                 <div className="audio-progress">
-                    <AudioProgress currentTime={currentTime} length={audio.duration}/>
+                    <AudioProgress currentTime={currentTime} length={audio.duration} updateCurrentTime={updateCurrentTime}/>
                 </div>
             </div>
             <div className="right-part">
