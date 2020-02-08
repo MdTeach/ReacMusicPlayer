@@ -36,15 +36,11 @@ export default ()=>{
 
     },[0]);
     
-    //audio utils
-    // const play = ()=>{audio.play()}
-    // const pause = ()=>{audio.pause()}
-    
     return(
         <div className="wrapper">
             <div className="left-part">
                 <div className="audio-control-button">
-                    <ControlButtons handlePlayPause={handlePlayPause}/>
+                    <ControlButtons handlePlayPause={handlePlayPause} isPaused={audio.paused}/>
                 </div>
                 <div className="audio-progress">
                     <AudioProgress currentTime={currentTime} length={audio.duration} updateCurrentTime={updateCurrentTime}/>

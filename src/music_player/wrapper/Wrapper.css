@@ -1,5 +1,6 @@
 .wrapper{
-    height: 80px;
+    width: 60%;
+    padding: .5em;
     background-color:#282828;
     display: flex;
 }

@@ -36,9 +36,6 @@ export default (props)=>{
         if(isMouseDown){
             const value = getPos(event)
             props.updateCurrentTime(value/100*props.length)
-            console.log("Setting ..",value)
-            // sliderButton.current.style.left = value + "%";
-            // sliderBackGround.current.style.width = value + "%";
         }
     }
     
@@ -66,7 +63,7 @@ export default (props)=>{
                     <div className="progress_bg" ref={sliderBackGround}> </div>
                 </div>
             </div>
-    <div className="progress-label">{!!totalLength ? getInMinutes(totalLength) : "0"}</div>
+    <div className="progress-label">{!!totalLength ? getInMinutes(totalLength) : "00:00"}</div>
         </div>
     )
 }
