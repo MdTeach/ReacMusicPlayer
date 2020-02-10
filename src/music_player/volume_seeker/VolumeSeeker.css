@@ -19,12 +19,12 @@
 /*
  * Main
  */
- .progress{
+ .vo_progress{
     margin: 0;
     margin-top: 4px;
     padding: 0;
-    width: 100%;
-    height: 4px;
+    width: 80%;
+    height: 5px;
     position: relative;
     cursor: pointer;
     background-color: #404040;
@@ -66,10 +66,10 @@
     z-index: 1;
 }
 
-.progress:hover >.progress_bg{
+.vo_progress:hover >.progress_bg{
     background-color: #60bb56;
 }
 
-.progress:hover >.progress_btn{
+.vo_progress:hover >.progress_btn{
     display: inline;
 }

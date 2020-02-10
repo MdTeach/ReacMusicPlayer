@@ -10,9 +10,8 @@ import VolumeSeeker from '../volume_seeker/VolumeSeeker'
 
 import './Wrapper.css'
 
-const url ="https://firebasestorage.googleapis.com/v0/b/auth-a3c8b.appspot.com/o/songs%2FMemories%20-%20Maroon%205.mp3?alt=media&token=94b50f5e-325d-4ebd-a498-1a5f084b9d4a"
-const audio = new Audio(url)
-export default ()=>{
+export default (props)=>{
+    const audio = props.audio
     
     const [currentTime,setCurrentTime] = useState(0) 
     const [currentVolume,setCurrentVolume] = useState(0);

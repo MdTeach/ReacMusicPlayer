@@ -45,7 +45,7 @@ export default (props)=>{
         <div className="audio-progress">
             <div className="progress-label"> icon </div>
             <div className="slidecontainer">
-                <div className="progress"
+                <div className="vo_progress"
                     ref={slider} 
                     // onMouseOver={(e)=>{change(e,isMouseDown)}} 
                     onMouseDown={(e)=>{isMouseDown = true;setProgressFromMouse(e)}}
