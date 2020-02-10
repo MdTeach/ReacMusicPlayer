@@ -46,7 +46,7 @@ export default (props)=>{
             sliderBackGround.current.style.width = value + "%";
         }
     }
-    console.log("Re",currentTime)
+    
     setProgress(currentTime)
     return(
         <div className="audio-progress">
